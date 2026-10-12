@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koło — warsztaty dla początkujących</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f6f8fc;color:#172033}
+.container{width:min(1100px,calc(100% - 40px));margin:0 auto}
+nav{background:#fff;border-bottom:1px solid #e6eaf0;position:sticky;top:0;z-index:10}
+.nav-content{min-height:70px;display:flex;align-items:center;justify-content:space-between}
+.logo{color:#102a43;font-size:25px;font-weight:800;text-decoration:none}
+.nav-links{display:flex;gap:28px}
+.nav-links a{color:#526174;text-decoration:none;font-size:15px;font-weight:600}
+.nav-links a:hover{color:#174ea6}
+.hero{padding:90px 0;background:#fff}
+.hero-content{display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:center}
+.eyebrow{display:inline-block;color:#174ea6;background:#eaf2ff;padding:7px 12px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:18px}
+.hero h1{margin:0;color:#102a43;font-size:clamp(42px,6vw,68px);line-height:1.05;letter-spacing:-2px}
+.hero h1 span{color:#174ea6}
+.hero p{max-width:600px;margin:24px 0 30px;color:#5d6b7c;font-size:18px;line-height:1.7}
+.hero-button{display:inline-block;padding:14px 22px;background:#102a43;color:white;border-radius:8px;text-decoration:none;font-weight:700}
+.hero-button:hover{background:#174ea6}
+.hero-card{position:relative;overflow:hidden;background:#f1f6fc;border:1px solid #dce6f2;border-radius:18px;padding:30px}
+.hero-card-title{color:#102a43;font-size:14px;font-weight:700;margin-bottom:20px}
+.hero-stat{padding:18px 0;border-bottom:1px solid #d9e2ed}
+.hero-stat:last-child{border-bottom:none}
+.hero-stat strong{display:block;color:#102a43;font-size:25px;margin-bottom:3px}
+.hero-stat span{color:#657487;font-size:14px}
+.hero-card.interactive{cursor:default}.stickman{position:absolute;width:92px;height:145px;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;opacity:0;z-index:3;filter:drop-shadow(0 7px 5px rgba(16,42,67,.14));transition:opacity .15s}.stickman.visible{opacity:1}.stickman svg{width:100%;height:100%;overflow:visible}.stickman .body-line{stroke:#102a43;stroke-width:5;stroke-linecap:round;fill:none}.stickman .head{fill:#fff;stroke:#102a43;stroke-width:4}.stickman .joint{fill:#174ea6}.cursor-hint{position:absolute;right:18px;bottom:15px;font-size:12px;color:#55657a;z-index:4;pointer-events:none}
+section{padding:75px 0}
+.section-heading{max-width:650px;margin-bottom:35px}
+.section-heading h2{margin:0 0 10px;color:#102a43;font-size:34px}
+.section-heading p{margin:0;color:#56667a;font-size:16px}
+.workshop-layout{display:grid;grid-template-columns:1.5fr 1fr;gap:25px}
+.card{background:#fff;border:1px solid #e4e9f0;border-radius:16px;padding:30px;box-shadow:0 8px 25px rgba(16,42,67,.05)}
+.workshop-card h3{margin-top:0;margin-bottom:12px;color:#102a43;font-size:25px}
+.workshop-card p{color:#647286;line-height:1.7}
+.workshop-details{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:25px}
+.detail{background:#f7f9fc;padding:15px;border-radius:9px}
+.detail small{display:block;color:#5b697b;margin-bottom:4px}
+.detail strong{color:#172033}
+.poster-card{display:flex;align-items:center;justify-content:center;background:#edf3fa;min-height:100%}
+.poster-card img{width:100%;max-height:430px;object-fit:contain;border-radius:10px}
+.table-wrapper{background:#fff;border:1px solid #e4e9f0;border-radius:16px;overflow-x:auto;box-shadow:0 8px 25px rgba(16,42,67,.05)}
+table{width:100%;border-collapse:collapse;min-width:600px}
+th{background:#102a43;color:#fff;text-align:left;padding:17px 20px;font-size:14px}
+td{padding:17px 20px;border-bottom:1px solid #edf0f4;color:#4e5d70}
+tbody tr:hover{background:#f8fafc}
+td:first-child{color:#172033;font-weight:700}
+tfoot{background:#f1f5f9;font-weight:700}
+tfoot td{color:#102a43;border-bottom:none}
+.calculator-section{background:#102a43}
+.calculator-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:50px;align-items:center}
+.calculator-text h2{color:#fff;font-size:36px;margin-top:0}
+.calculator-text p{color:#c9d5e3;line-height:1.7}
+.calculator{background:#fff;padding:30px;border-radius:16px}
+.calculator label{display:block;color:#26364a;font-size:14px;font-weight:700;margin-bottom:7px}
+.calculator input{width:100%;padding:13px 14px;margin-bottom:18px;border:1px solid #8a97a8;border-radius:8px;font-size:16px;font-family:inherit}
+.calculator input:focus{outline:none;border-color:#174ea6;box-shadow:0 0 0 3px #cfe0ff}
+.calculator button{width:100%;padding:14px;border:none;border-radius:8px;background:#174ea6;color:#fff;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer}
+.calculator button:hover{background:#123d82}
+#wynik{min-height:48px;margin-top:18px;padding:14px;border-radius:8px;background:#f1f5f9;color:#26364a;font-weight:600}
+#wynik.error{background:#fdecec;color:#8a1f1f}
+a:focus-visible,button:focus-visible{outline:3px solid #174ea6;outline-offset:3px;border-radius:6px}
+.hero-button:focus-visible{outline-color:#174ea6}
+@media(hover:none),(pointer:coarse){.hero-card.interactive{cursor:default}.stickman,.cursor-hint{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.stickman,.cursor-hint{display:none}*{transition:none!important}}
+footer{background:#0b1f33;color:#aebdcd;padding:30px 0}
+.footer-content{display:flex;justify-content:space-between;gap:20px;align-items:center}
+footer p{margin:0;font-size:14px}
+@media(max-width:800px){.nav-links{gap:16px}.nav-links a{font-size:14px}.hero{padding:60px 0}.hero-content,.workshop-layout,.calculator-layout{grid-template-columns:1fr}section{padding:55px 0}.footer-content{flex-direction:column;align-items:flex-start}}
+@media(max-width:500px){.container{width:min(100% - 28px,1100px)}.hero h1{font-size:44px}.hero p{font-size:16px}.card{padding:22px}.workshop-details{grid-template-columns:1fr}.section-heading h2{font-size:28px}}
+</style>
+</head>
+<body>
+<nav><div class="container nav-content"><a href="#" class="logo">Koło</a><div class="nav-links"><a href="#warsztat">Warsztat</a><a href="#zapisy">Zapisy</a><a href="#kalkulator">Kalkulator</a></div></div></nav>
+
+<header class="hero">
+<div class="container hero-content">
+<div>
+<div class="eyebrow">WARSZTATY DLA POCZĄTKUJĄCYCH</div>
+<h1>Nauka.<br>Praktyka.<br><span>Koło.</span></h1>
+<p>Fikcyjne koło naukowe organizujące bezpłatne warsztaty dla osób, które chcą zacząć swoją przygodę z technologią.</p>
+<a href="#warsztat" class="hero-button">Zobacz warsztat</a>
+</div>
+<div class="hero-card interactive" id="interactivePanel">
+<div class="hero-card-title">NAJBLIŻSZY WARSZTAT</div>
+<div class="stickman" id="stickman" aria-hidden="true"><svg viewBox="0 0 92 145"><circle class="head" cx="46" cy="25" r="14"></circle><path class="body-line" d="M46 39 L46 86"></path><path id="leftArm" class="body-line" d="M46 50 L25 70 L12 58"></path><path id="rightArm" class="body-line" d="M46 50 L67 70 L80 58"></path><path id="leftLeg" class="body-line" d="M46 86 L29 113 L22 136"></path><path id="rightLeg" class="body-line" d="M46 86 L63 113 L70 136"></path><circle id="leftHand" class="joint" cx="12" cy="58" r="3"></circle><circle id="rightHand" class="joint" cx="80" cy="58" r="3"></circle></svg></div><div class="cursor-hint">Porusz kursorem po panelu</div>
+<div class="hero-stat"><strong>HTML</strong><span>Warsztat dla początkujących</span></div>
+<div class="hero-stat"><strong>60 min</strong><span>Czas trwania</span></div>
+<div class="hero-stat"><strong>14 / 16</strong><span>Zapisanych uczestników</span></div>
+<div class="hero-stat"><strong>Bezpłatny</strong><span>Udział w warsztacie</span></div>
+</div>
+</div>
+</header>
+
+<main>
+<section id="warsztat"><div class="container">
+<div class="section-heading"><h2>Warsztat HTML</h2><p>Pierwszy krok do stworzenia własnej strony internetowej.</p></div>
+<div class="workshop-layout">
+<div class="card workshop-card">
+<h3>Od zera do pierwszej strony</h3>
+<p>Podczas warsztatu uczestnicy stworzą swoją pierwszą stronę z nagłówkiem, akapitem i linkiem. Zajęcia są przeznaczone dla początkujących.</p>
+<div class="workshop-details">
+<div class="detail"><small>Czas trwania</small><strong>60 minut</strong></div>
+<div class="detail"><small>Udział</small><strong>Bezpłatny</strong></div>
+<div class="detail"><small>Limit</small><strong>16 osób</strong></div>
+<div class="detail"><small>Termin</small><strong>Do ustalenia</strong></div>
+<div class="detail"><small>Miejsce</small><strong>Do ustalenia</strong></div>
+<div class="detail"><small>Zapisy</small><strong>Do ustalenia</strong></div>
+</div>
+</div>
+<div class="card poster-card"><img src="plakat.png" alt="Plakat bezpłatnego warsztatu HTML dla początkujących" loading="lazy"></div>
+</div>
+</div></section>
+
+<section id="zapisy"><div class="container">
+<div class="section-heading"><h2>Warsztaty i zapisy</h2><p>Aktualna liczba miejsc na poszczególnych warsztatach.</p></div>
+<div class="table-wrapper"><table>
+<thead><tr><th>Warsztat</th><th>Limit</th><th>Zapisy</th><th>Wolne miejsca</th></tr></thead>
+<tbody>
+<tr><td>Git</td><td>12</td><td>11</td><td>1</td></tr>
+<tr><td>API</td><td>10</td><td>9</td><td>1</td></tr>
+<tr><td>HTML</td><td>16</td><td>14</td><td>2</td></tr>
+</tbody>
+<tfoot><tr><td>Razem</td><td>38</td><td>34</td><td>4</td></tr></tfoot>
+</table></div>
+</div></section>
+
+<section id="kalkulator" class="calculator-section"><div class="container calculator-layout">
+<div class="calculator-text"><h2>Kalkulator kartek</h2><p>Oblicz, ile kartek trzeba przygotować dla uczestników warsztatu. Wystarczy podać liczbę uczestników oraz liczbę kartek przypadających na jedną osobę.</p></div>
+<form class="calculator" id="kalkulatorForm" novalidate>
+<label for="uczestnicy">Liczba uczestników</label>
+<input type="number" id="uczestnicy" min="0" max="16" step="1" inputmode="numeric" placeholder="0–16">
+<label for="kartki">Kartki na osobę</label>
+<input type="number" id="kartki" min="1" step="1" inputmode="numeric" placeholder="np. 2">
+<button type="submit">Oblicz</button>
+<div id="wynik" role="status" aria-live="polite"></div>
+</form>
+</div></section>
+</main>
+
+<footer><div class="container footer-content"><p>Koło jest fikcyjne. Strona powstała z pomocą AI na kursie Praktyczne AI w IT.</p><p>Autor: do ustalenia</p></div></footer>
+
+<script>
+(function () {
+    "use strict";
+
+    /* ---------- Kalkulator kartek ---------- */
+    const formularz = document.getElementById("kalkulatorForm");
+    const poleUczestnicy = document.getElementById("uczestnicy");
+    const poleKartki = document.getElementById("kartki");
+    const wynik = document.getElementById("wynik");
+    const MAX_UCZESTNIKOW = Number(poleUczestnicy.max);
+
+    function pokazWynik(tekst, blad) {
+        wynik.textContent = tekst;
+        wynik.classList.toggle("error", Boolean(blad));
+    }
+
+    function odmianaKartek(n) {
+        const dwie = n % 100;
+        const jedn = n % 10;
+        if (n === 1) return "kartkę";
+        if (jedn >= 2 && jedn <= 4 && !(dwie >= 12 && dwie <= 14)) return "kartki";
+        return "kartek";
+    }
+
+    function obliczKartki() {
+        const uczestnicyTekst = poleUczestnicy.value.trim();
+        const kartkiTekst = poleKartki.value.trim();
+
+        if (uczestnicyTekst === "" || kartkiTekst === "") {
+            pokazWynik("Błąd: uzupełnij oba pola.", true);
+            return;
+        }
+
+        const uczestnicy = Number(uczestnicyTekst);
+        const kartki = Number(kartkiTekst);
+
+        if (!Number.isInteger(uczestnicy) || uczestnicy < 0 || uczestnicy > MAX_UCZESTNIKOW) {
+            pokazWynik("Błąd: liczba uczestników musi być liczbą całkowitą od 0 do " + MAX_UCZESTNIKOW + ".", true);
+            return;
+        }
+
+        if (!Number.isInteger(kartki) || kartki <= 0) {
+            pokazWynik("Błąd: kartki na osobę muszą być dodatnią liczbą całkowitą.", true);
+            return;
+        }
+
+        if (uczestnicy === 0) {
+            pokazWynik("Nie trzeba drukować kartek.", false);
+            return;
+        }
+
+        const razem = uczestnicy * kartki;
+        pokazWynik("Trzeba wydrukować " + razem + " " + odmianaKartek(razem) + ".", false);
+    }
+
+    formularz.addEventListener("submit", function (e) {
+        e.preventDefault();
+        obliczKartki();
+    });
+
+    /* ---------- Ludzik podążający za kursorem ---------- */
+    const panel = document.getElementById("interactivePanel");
+    const stickman = document.getElementById("stickman");
+    const bezRuchu = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!panel || !stickman || bezRuchu) return;
+
+    const lewaReka = document.getElementById("leftArm");
+    const prawaReka = document.getElementById("rightArm");
+    const lewaNoga = document.getElementById("leftLeg");
+    const prawaNoga = document.getElementById("rightLeg");
+
+    let celX = 0.5, celY = 0.5;   // pozycja kursora (0–1)
+    let x = 0.5, y = 0.5;         // pozycja ludzika
+    let vx = 0, vy = 0, obrot = 0;
+    let klatka = null;
+
+    function ogranicz(wartosc, min, max) {
+        return Math.max(min, Math.min(max, wartosc));
+    }
+
+    function animuj() {
+        vx += (celX - x) * 0.055;
+        vy += (celY - y) * 0.055;
+        vx *= 0.78;
+        vy *= 0.78;
+        x += vx;
+        y += vy;
+        obrot += (vx * 0.9 - obrot) * 0.08;
+
+        stickman.style.left = x * 100 + "%";
+        stickman.style.top = y * 100 + "%";
+        stickman.style.transform = "translate(-50%,-50%) rotate(" + obrot + "deg)";
+
+        // ręce sięgają w stronę kursora
+        const dx = (celX - x) * 120;
+        const dy = (celY - y) * 120;
+        lewaReka.setAttribute("d", "M46 50 L25 70 L" + (12 + dx).toFixed(1) + " " + (58 + dy).toFixed(1));
+        prawaReka.setAttribute("d", "M46 50 L67 70 L" + (80 + dx).toFixed(1) + " " + (58 + dy).toFixed(1));
+
+        // nogi wychylają się zgodnie z ruchem
+        const krok = ogranicz(vx * 22, -16, 16);
+        lewaNoga.setAttribute("d", "M46 86 L" + (29 - krok) + " 113 L" + (22 - krok * 1.4) + " 136");
+        prawaNoga.setAttribute("d", "M46 86 L" + (63 - krok) + " 113 L" + (70 - krok * 1.4) + " 136");
+
+        klatka = requestAnimationFrame(animuj);
+    }
+
+    function start() {
+        stickman.classList.add("visible");
+        if (klatka === null) klatka = requestAnimationFrame(animuj);
+    }
+
+    function stop() {
+        stickman.classList.remove("visible");
+        if (klatka !== null) {
+            cancelAnimationFrame(klatka);
+            klatka = null;
+        }
+        celX = celY = x = y = 0.5;
+        vx = vy = obrot = 0;
+    }
+
+    // tylko mysz – na dotyku animacja jest wyłączona
+    panel.addEventListener("pointerenter", function (e) {
+        if (e.pointerType === "mouse") start();
+    });
+
+    panel.addEventListener("pointermove", function (e) {
+        if (e.pointerType !== "mouse") return;
+        const r = panel.getBoundingClientRect();
+        celX = ogranicz((e.clientX - r.left) / r.width, 0.12, 0.88);
+        celY = ogranicz((e.clientY - r.top) / r.height, 0.12, 0.88);
+    });
+
+    panel.addEventListener("pointerleave", stop);
+})();
+</script>
+</body>
+</html>
